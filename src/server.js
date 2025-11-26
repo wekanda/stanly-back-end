@@ -23,7 +23,7 @@ const initializeDefaultUsers = async () => {
     const defaultUsers = [
       {
         name: 'Admin User',
-        email: 'admin@mbalehub.com',
+        email: 'admin@ucuhub.com',
         password: 'password123',
         role: 'admin',
         faculty: 'Administration',
@@ -32,7 +32,7 @@ const initializeDefaultUsers = async () => {
       },
       {
         name: 'Supervisor User',
-        email: 'supervisor@mbalehub.com',
+        email: 'supervisor@ucuhub.com',
         password: 'password123',
         role: 'supervisor',
         faculty: 'Engineering',
@@ -41,7 +41,7 @@ const initializeDefaultUsers = async () => {
       },
       {
         name: 'Student User',
-        email: 'student@mbalehub.com',
+        email: 'student@ucuhub.com',
         password: 'password123',
         role: 'student',
         faculty: 'Science',
@@ -97,7 +97,7 @@ app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 app.get('/health', (req, res) => {
   res.json({
     success: true,
-    message: 'Mbale Innovators Hub API is running',
+    message: 'UCU Innovators Hub API is running',
     timestamp: new Date().toISOString(),
     environment: process.env.NODE_ENV
   });
@@ -111,7 +111,7 @@ app.use('/api/projects', projectRoutes);
 app.get('/', (req, res) => {
   res.json({
     success: true,
-    message: 'Welcome to Mbale Innovators Hub API',
+    message: 'Welcome to UCU Innovators Hub API',
     version: '1.0.0',
     endpoints: {
       auth: '/api/auth',
@@ -179,7 +179,7 @@ const PORT = process.env.PORT || 5000;
 
 const server = app.listen(PORT, () => {
   console.log(`
-🚀 Mbale Innovators Hub API Server Started!
+🚀 UCU Innovators Hub API Server Started!
 📍 Running on: http://localhost:${PORT}
 🌍 Environment: ${process.env.NODE_ENV || 'development'}
 📊 Health Check: http://localhost:${PORT}/health

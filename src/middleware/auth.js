@@ -63,10 +63,17 @@ exports.protect = async (req, res, next) => {
 
   try {
     // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret');
 
-    // Get user from mock data by ID
-    const user = Object.values(mockUsers).find(u => u.id === decoded.id);
+    // Try to get user from database first
+    let user;
+    try {
+      const User = require('../models/User');
+      user = await User.findById(decoded.id);
+    } catch (dbError) {
+      // If database fails, fall back to mock data
+      user = Object.values(mockUsers).find(u => u.id === decoded.id);
+    }
 
     if (!user) {
       return res.status(401).json({
@@ -75,7 +82,16 @@ exports.protect = async (req, res, next) => {
       });
     }
 
-    req.user = user;
+    // Normalize user object
+    req.user = {
+      id: user._id || user.id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+      faculty: user.faculty,
+      department: user.department
+    };
+
     next();
   } catch (err) {
     return res.status(401).json({

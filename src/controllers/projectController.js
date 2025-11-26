@@ -61,7 +61,7 @@ let mockProjects = [
       _id: '507f1f77bcf86cd799439013',
       id: '507f1f77bcf86cd799439013',
       name: 'Student User',
-      email: 'student@mbalehub.com'
+      email: 'student@ucuhub.com'
     },
     githubUrl: 'https://github.com/student/e-learning',
     liveDemoUrl: 'https://demo.e-learning.com',
@@ -321,9 +321,9 @@ exports.deleteProject = async (req, res) => {
 // @access  Private
 exports.getUserProjects = async (req, res) => {
   try {
-    // Filter mock projects by user
+    // Filter mock projects by user (check both ID and email for compatibility)
     const userProjects = mockProjects.filter(project =>
-      project.submittedBy.id === req.user.id
+      project.submittedBy.id === req.user.id || project.submittedBy.email === req.user.email
     );
 
     res.json({

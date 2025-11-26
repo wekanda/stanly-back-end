@@ -1,7 +1,7 @@
 {
   "name": "mbale-innovators-hub-backend",
   "version": "1.0.0",
-  "description": "Backend API for Mbale Innovators Hub",
+  "description": "Backend API for UCU Innovators Hub",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
